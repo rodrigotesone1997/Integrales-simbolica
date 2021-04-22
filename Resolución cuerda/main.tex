@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{commath}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{cases}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\title{Resolución cuerda}
+\author{Rodrigo Tesone}
+\date{April 2021}
+
+\begin{document}
+
+\maketitle
+
+\section*{Resolución de ecuación de una cuerda}
+\subsection*{2)}
+La idea es resolver:
+\begin{equation}\label{Derivada_parcial_cuerda}
+    \frac{\partial^2 u}{\partial x^2}=\frac{1}{c^2}\frac{\partial^2 u}{\partial t^2}
+\end{equation}
+Con las condiciones de contorno: \\
+\begin{numcases}{}
+    u(0,t)=0\label{Condicion_contorno_1}\\
+    u(L,t)=0\label{Condicion_contorno_2}
+\end{numcases}
+Y las condiciones iniciales:
+\begin{equation}\label{Condicion_incial_1}
+    u(x,0) = f(x)=
+    \begin{cases}
+        \frac{2c}{L}x & \text{for } 0\leq x \leq \frac{L}{2}\\[10px]
+        \frac{2c}{L}(L-x) & \text{for } \frac{L}{2} < x \leq L \\
+    \end{cases}
+\end{equation}
+\begin{equation}\label{Condicion_inicial_2}
+    \frac{\partial u}{\partial t} (x,0)= 0
+\end{equation}
+Planteo:$$u(x,t)=A(x)B(t)$$
+Calculo las derivadas:
+\begin{equation*}
+    \begin{split}
+        \frac{\partial^2 u}{\partial x^2}=A^{''}(x)B(t)\\
+        \frac{\partial^2 u}{\partial t^2}=A(x)B^{''}(t)\\
+    \end{split}
+\end{equation*}
+Reemplazo en \eqref{Derivada_parcial_cuerda} y trabajo algebraicamente:
+\begin{equation*}
+    \begin{split}
+        A^{''}(x)B(t)&=\frac{1}{c^2}A(x)B^{''}(t)\\
+        \frac{A^{''}(x)}{A(x)} & = \frac{1}{c^2}\frac{B^{''}(t)}{B(t)}
+    \end{split}
+\end{equation*}
+Dado que se esta igualando entre 2 funciones de variables diferentes la única solución posible es que la razón sobre esas funciones sea una constante llamada $-\lambda$.\\
+Considerando eso planteamos las siguientes ecuaciones diferenciales:
+\begin{numcases}{}
+    A^{''}(x)+\lambda A(x)&=0 \label{eq:x} \\
+    B^{''}(t)+\lambda c^2B(t)&=0 \label{eq:t}
+\end{numcases}
+De aqui vemos que se reduce a 2 ecuaciones diferenciales de una sola variable.\\
+La solución de \eqref{eq:x} es:
+\begin{equation*}
+    A(x) =C_1 \sin\left({\sqrt{\lambda}x}\right)+C_2\cos\left({\sqrt{\lambda}x}\right)
+\end{equation*}
+Le aplico la condición \eqref{Condicion_contorno_1}:
+\begin{equation*}
+    \begin{split}
+        u(0,t)=A(0)B(t)&=0\\
+        A(0)&=0\\
+        C_2\cos(0)&=0\\
+        C_2 &=0
+    \end{split}
+\end{equation*}
+Ahora aplico \eqref{Condicion_contorno_2}:
+\begin{equation*}
+    \begin{split}
+        u(L,t)=A(L)B(t)&=0\\
+        A(L)&=0\\
+        C_1 \sin\left({\sqrt{\lambda}L}\right) &=0\\
+        \text{Dado que $C_1$ no puede ser 0}\\
+        \sqrt{\lambda}L &= n\pi\\
+        \sqrt{\lambda} &=\frac{n\pi}{L}
+    \end{split}
+\end{equation*}
+Con esta relación para $\lambda$ resolvemos \eqref{eq:t} proponiendo:
+\begin{equation*}
+    B(t) = D_1 \sin\left({\sqrt{\lambda}x}\right)+D_2\cos\left({\sqrt{\lambda}x}\right)
+\end{equation*}
+Le aplico la condición \eqref{Condicion_inicial_2}:
+\begin{equation*}
+    \begin{split}
+        \frac{\partial u}{\partial t} &= \frac{\partial (A(x)B(t))}{\partial t}=A(x)\frac{\partial B(t)}{\partial t}=A(x)\left[ D_1\sqrt{\lambda} \cos\left({\sqrt{\lambda}x}\right)-D_2\sqrt{\lambda}\sin\left({\sqrt{\lambda}x}\right) \right]\\
+        \frac{\partial u}{\partial t} (x,0)&= A(x)\left[ D_1\sqrt{\lambda} \cos\left({\sqrt{\lambda}0}\right)-D_2\sqrt{\lambda}\sin\left({\sqrt{\lambda}0}\right) \right]\\
+        \frac{\partial u}{\partial t} (x,0)&=A(x)D_1\sqrt{\lambda}\\
+        0 &=A(x)D_1\sqrt{\lambda}\\
+        D_1 &=0  
+        \end{split}
+\end{equation*}
+$\therefore$ 
+\begin{equation*}
+    u(x,t)=\sum_{n=1}^{+\infty}c_n\sin{\left(\frac{n\pi}{L}x\right)}\cos{\left(\frac{n\pi}{L}ct\right)}
+\end{equation*}
+Para plantear la condición inicial \eqref{Condicion_incial_1} primero reescribimos a $f(x)$ como $\widetilde{f}(x)$ siendo $\widetilde{f}(x)$ una función impar:
+\begin{equation*}
+    \widetilde{f}(x)=
+    \begin{cases}
+    -\frac{2c}{L}(L+x) & \text{for } -L < x \leq -\frac{L}{2} \\[10px]
+    \frac{2c}{L}x & \text{for } -\frac{l}{2}\leq x \leq 0\\[10px]
+    \frac{2c}{L}x & \text{for } 0\leq x \leq \frac{L}{2}\\[10px]
+    \frac{2c}{L}(L-x) & \text{for } \frac{L}{2} < x \leq L \\
+    \end{cases}
+\end{equation*}
+Ahora calculamos 
+\begin{equation*}
+    \widetilde{f}(x)=\sum_{n=1}^{+\infty}c_n\sin{\left(\frac{n\pi}{L}x\right)}
+\end{equation*}
+Solo falta obtener $c_n$ que es el termino que resulta de calcular una serie de Fourier de senos:
+\begin{equation*}
+    \begin{split}
+        c_n &= \frac{2}{L}\int_{0}^L f(x)\sin{\left(\frac{n\pi}{L}x\right)} dx \\
+        c_n &= \frac{2}{L}\left[\underbrace{\int_0^{\frac{L}{2}}\frac{2c}{L}x\sin{\left(\frac{n\pi}{L}x\right)}}_{f_1}+\underbrace{\int_{\frac{L}{2}}^{L} \frac{2c}{L}(L-x)\sin{\left(\frac{n\pi}{L}x\right)}dx}_{f_2} \right]
+    \end{split}
+\end{equation*}
+Luego de resolverlas en el jupyternotbook vemos:
+\begin{equation*}
+    c_n = \frac{2}{L}\left[ \frac{2 C \left(- \frac{L^{2} \cos{\left(\frac{n \pi}{2} \right)}}{2 n \pi} + \frac{L^{2} \sin{\left(\frac{n \pi}{2} \right)}}{n^{2} \pi^{2}}\right)}{L}-    \frac{2 C L \sin{\left(n \pi \right)}}{n^{2} \pi^{2}} - \frac{2 C \left(- \frac{L^{2} \cos{\left(\frac{n \pi}{2} \right)}}{2 n \pi} - \frac{L^{2} \sin{\left(\frac{n \pi}{2} \right)}}{n^{2} \pi^{2}}\right)}{L} \right]
+\end{equation*}
+Reacomodando terminos se ve:
+\begin{equation*}
+    c_n = \frac{8c}{n^2\pi^2}\sin{\left(n\frac{\pi}{2}\right)}
+\end{equation*}
+Los pares se anulan asique pruebo con $n=2n-1$:
+\begin{equation*}
+    c_{2n-1} = \frac{8c}{(2n-1)^2\pi^2}(-1)^{n+1}
+\end{equation*}
+$\therefore$ 
+\begin{equation*}
+    u(x,t)=\sum_{n=1}^{+\infty}\frac{8c}{(2n-1)^2\pi^2}(-1)^{n+1}\sin{\left(\frac{(2n-1)\pi}{L}x\right)}\cos{\left(\frac{(2n-1)\pi}{L}ct\right)}
+\end{equation*}
+\end{document}
